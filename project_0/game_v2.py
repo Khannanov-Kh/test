@@ -3,12 +3,13 @@ import numpy as np
 def random_predict(number:int=1) -> int:
     """number of tries to guess some number
     Args:
-        number (int, optional): _description_. Defaults to 1.
+        number (int, optional): Guessed number. Defaults to 1.
 
     Returns:
         int: _description_ => return number of tries
     """
     count = 0
+    # continue to increase counter till it's guessed
     while True:
         count += 1
         predict_number = np.random.randint(1,101)
