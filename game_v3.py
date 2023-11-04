@@ -9,31 +9,32 @@ def game_core_v3(number: int = 1) -> int:
     Returns:
         int: Число попыток
     """
-    np.random.seed(1)
+    np.random.seed(3)
     predict = np.random.randint(1, 101)
     print(predict)
     numbers_lst = list(range(1, 101))
-    print(numbers_lst)
-    low, high = numbers_lst[0], len(numbers_lst) # get indexes
-
-    mid = (low + high)//2 # index, not a number
-    print(mid)
+    
+    low = 0
+    high = len(numbers_lst)-1
     count = 0
-    while low <= high:
-        if predict == numbers_lst[mid]:
-            count += 1
-            
-        elif predict < numbers_lst[mid]:
-            count += 1
-            high = mid-1
-            
-        else:
-            predict > numbers_lst[mid]
-            count += 1
-            low = mid+1
+    
+    def rec(numbers_lst, low, high, predict, count):
+      
+      mid = (low + high)//2 # index, not a number
 
-    return count
+      if predict == numbers_lst[mid] or predict == numbers_lst[high]:
+        count += 1
+        return count
+      elif predict < numbers_lst[mid]:
+        count += 1
+        return rec(numbers_lst, low, mid-1, predict, count)
+      elif predict > numbers_lst[mid]:
+        count += 1
+        return rec(numbers_lst, mid+1, high, predict, count)
+    
+    return rec(numbers_lst, low, high, predict, count)
 
 
-game_core_v3()
+
+print(game_core_v3())
         
